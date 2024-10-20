@@ -4,15 +4,15 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='tangent_calc',
+            package='gom_l6o',
             namespace='tangent_publisher',
-            executable='tangent_publisher',
-            name='screen'
+            executable='simple_pub_node',
+            name='tangent_publisher_node'
         ),
         Node(
-            package='turtlesim',
+            package='gom_l6o',
             namespace='tangent_subscriber',
-            executable='tangent_subscriber',
-            name='screen'
+            executable='simple_sub_node',
+            name='tangent_subscriber_node'
         )
     ])

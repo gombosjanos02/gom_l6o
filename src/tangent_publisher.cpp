@@ -29,7 +29,7 @@ class TangentPublisher : public rclcpp::Node{
                 count_+=0.1;
             }
         rclcpp::TimerBase::SharedPtr timer_;
-        rclcpp::Publisher<std_msgs::String>::Shared Ptr rmw_publisher_t;
+        std::shared_ptr<rclcpp::Publisher<std_msgs::msg::String>> rmw_publisher_t;
         double count_;
         
 };
@@ -37,6 +37,6 @@ class TangentPublisher : public rclcpp::Node{
 int main(int argc, char * argv[]){
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<TangentPublisher>());
-    rclcpp::shutdown;
+    rclcpp::shutdown();
     return 0;
 }
