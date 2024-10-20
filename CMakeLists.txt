@@ -22,15 +22,18 @@ set(ament_dependencies
 )
 
 add_executable(simple_sub_node src/tangent_subscriber.cpp)
-add_executable(simple_sub_node src/tangent_publisher.cpp)
-ament_target_dependencies(simple_sub_node ${ament_dependencies} )
+ament_target_dependencies(simple_sub_node ${ament_dependencies})
+
+add_executable(simple_pub_node src/tangent_publisher.cpp)
+ament_target_dependencies(simple_pub_node ${ament_dependencies})
+
 
 install(DIRECTORY launch
+simple_sub_node1
+simple_sub_node2
   DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
- tangent_publisher
- tangent_subscriber
 DESTINATION lib/${PROJECT_NAME})
 
 ament_package()

@@ -10,7 +10,7 @@ using namespace std::chrono_literals;
 class TangentPublisher : public rclcpp::Node{
     public:
         TangentPublisher():Node("tangent_publisher"), count_(0.0){
-            publisher_= this->create_publisher<std_msgs::msg::String>("tangent_topic",10);
+            rmw_publisher_t= this->create_publisher<std_msgs::msg::String>("tangent_topic",10);
             timer_=this->create_wall_timer(
                 500ms, std::bind(&TangentPublisher::publish_tangent,this));
             }
@@ -25,11 +25,11 @@ class TangentPublisher : public rclcpp::Node{
 
                 message.data = "Tangent x1: " + std::to_string(tan_x1)+" \\ Tangent x2: " + std::to_string(tan_x2);
                 RCLCPP_INFO(this->get_logger(), "Publishing: '%s'",message.data.c_str());
-                publisher_->publish(message);
+                rmw_publisher_t->publish(message);
                 count_+=0.1;
             }
         rclcpp::TimerBase::SharedPtr timer_;
-        rclcpp::Publisher<std_msg::String>::Shared Ptr publisher_;
+        rclcpp::Publisher<std_msgs::String>::Shared Ptr rmw_publisher_t;
         double count_;
         
 };
@@ -37,6 +37,6 @@ class TangentPublisher : public rclcpp::Node{
 int main(int argc, char * argv[]){
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<TangentPublisher>());
-    rclcpp:shutdown();
+    rclcpp::shutdown;
     return 0;
 }
