@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project()
+project(gom_l6o)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -21,14 +21,16 @@ set(ament_dependencies
   geometry_msgs
 )
 
-# add_executable(simple_sub_node src/print_pose.cpp)
-# ament_target_dependencies(simple_sub_node ${ament_dependencies} )
+add_executable(simple_sub_node src/tangent_subscriber.cpp)
+add_executable(simple_sub_node src/tangent_publisher.cpp)
+ament_target_dependencies(simple_sub_node ${ament_dependencies} )
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
-# simple_sub_node
+ tangent_publisher
+ tangent_subscriber
 DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
